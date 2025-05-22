@@ -99,7 +99,6 @@ public class BCRobotics {
         }
 
         BCRoboticsBlocks.preInit();
-        BCRoboticsPlugs.preInit();
         BCRoboticsItems.preInit();
         BCRoboticsStatements.preInit();
         BCRoboticsEntities.preInit();
