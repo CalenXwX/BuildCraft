@@ -75,7 +75,6 @@ public class BCTransport {
         BCTransportConfig.preInit();
         BCTransportBlocks.preInit();
         BCTransportPipes.preInit();
-        BCTransportPlugs.preInit();
         BCTransportItems.preInit();
         BCTransportStatements.preInit();
 

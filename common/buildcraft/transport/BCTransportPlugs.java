@@ -20,7 +20,7 @@ public class BCTransportPlugs {
     public static PluggableDefinition blocker;
     public static PluggableDefinition powerAdaptor;
 
-    public static void preInit() {
+    static {
         blocker = register("blocker", PluggableBlocker::new);
         powerAdaptor = register("power_adaptor", PluggablePowerAdaptor::new);
     }

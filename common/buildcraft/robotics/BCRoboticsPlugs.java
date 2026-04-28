@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 public class BCRoboticsPlugs {
     public static PluggableDefinition robotStation;
 
-    public static void preInit() {
+    static {
         robotStation = register("robot_station", PluggableRobotStation::new, PluggableRobotStation::new);
     }
 

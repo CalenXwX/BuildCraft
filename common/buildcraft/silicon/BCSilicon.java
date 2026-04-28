@@ -82,7 +82,6 @@ public class BCSilicon {
 
         BCSiliconConfig.preInit();
         BCSiliconBlocks.preInit();
-        BCSiliconPlugs.preInit();
         BCSiliconItems.preInit();
         BCSiliconStatements.preInit();
 

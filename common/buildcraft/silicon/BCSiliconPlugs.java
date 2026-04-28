@@ -18,7 +18,7 @@ public class BCSiliconPlugs {
     public static PluggableDefinition timer;
     public static PluggableDefinition facade;
 
-    public static void preInit() {
+    static {
         gate = register("gate", PluggableGate::new, PluggableGate::new);
         lens = register("lens", PluggableLens::new, PluggableLens::new);
         pulsar = register("pulsar", PluggablePulsar::new, PluggablePulsar::new);
