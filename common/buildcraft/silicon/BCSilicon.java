@@ -8,6 +8,7 @@ import buildcraft.api.recipes.IAssemblyRecipe;
 import buildcraft.api.recipes.IProgrammingRecipe;
 import buildcraft.api.recipes.IntegrationRecipe;
 import buildcraft.core.BCCore;
+import buildcraft.lib.BCLibRegistries;
 import buildcraft.lib.recipe.assembly.AssemblyRecipe;
 import buildcraft.lib.recipe.assembly.AssemblyRecipeRegistry;
 import buildcraft.lib.recipe.assembly.AssemblyRecipeSerializer;
@@ -71,6 +72,8 @@ public class BCSilicon {
 
     @SubscribeEvent
     public static void preInit(FMLConstructModEvent evt) {
+        BCLibRegistries.fmlPreInit(); // this should be called in BCLib#<clinit> before BCTransport#preInit called, but sometimes the order is incorrect?
+
         RegistryConfig.useOtherModConfigFor(MODID, BCCore.MODID);
 
         tabPlugs = CreativeTabManager.createTab("buildcraft.plugs");

@@ -245,6 +245,7 @@ public class BCEnergyFluids {
                 .noCollission()
                 .randomTicks()
                 .strength(100.0F)
+                .replaceable() // if not replaceable, <Create> mod's HosePulley will not be able to enter the oil block
                 .noLootTable();
         if (flammable) {
             // def.setFlammable(flammable)

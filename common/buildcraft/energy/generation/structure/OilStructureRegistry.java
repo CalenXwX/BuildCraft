@@ -16,6 +16,6 @@ public class OilStructureRegistry {
             STRUCTURE_ID.toString()
     );
 
-    public static void cinit() {
+    public static void clinit() {
     }
 }

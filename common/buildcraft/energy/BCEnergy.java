@@ -5,6 +5,7 @@ import buildcraft.api.fuels.ICoolant;
 import buildcraft.api.fuels.IFuel;
 import buildcraft.core.BCCore;
 import buildcraft.energy.generation.structure.OilStructureRegistry;
+import buildcraft.lib.BCLibRegistries;
 import buildcraft.lib.fluid.BCFluid;
 import buildcraft.lib.recipe.coolant.CoolantRecipeSerializer;
 import buildcraft.lib.recipe.fuel.FuelRecipeSerializer;
@@ -55,7 +56,10 @@ public class BCEnergy {
 
     @SubscribeEvent
     public static void preInit(FMLConstructModEvent event) {
+        BCLibRegistries.fmlPreInit(); // this should be called in BCLib#<clinit> before BCTransport#preInit called, but sometimes the order is incorrect?
+
         RegistryConfig.useOtherModConfigFor(MODID, BCCore.MODID);
+
         BCEnergyConfig.preInit();
         BCEnergyEntities.preInit();
         BCEnergyWorldGen.preInit();
@@ -110,7 +114,7 @@ public class BCEnergy {
             BCEnergyMenuTypes.registerAll();
 
             // Worldgen
-            OilStructureRegistry.cinit();
+            OilStructureRegistry.clinit();
         }
     }
 

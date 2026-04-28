@@ -10,7 +10,7 @@ import buildcraft.lib.gui.GuiBC8;
 import buildcraft.lib.gui.GuiIcon;
 import buildcraft.lib.gui.pos.GuiRectangle;
 import buildcraft.lib.misc.LocaleUtil;
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
@@ -37,14 +37,15 @@ public class GuiArchitectTable extends GuiBC8<ContainerArchitectTable> {
     }
 
     @Override
-    public void initGui() {
-        super.initGui();
+    public void initWhenOpenGuiOrResizeWindow() {
+        super.initWhenOpenGuiOrResizeWindow();
+        this.removeWidget(this.nameField);
 //        nameField = new GuiTextField(0, fontRenderer, guiLeft + 90, guiTop + 62, 156, 12);
-//        nameField = new EditBox(font, leftPos + 90, topPos + 62, 156, 12, Component.literal(container.tile.name));
-        nameField = new EditBox(font, 90, 62, 156, 12, Component.literal(""));
+        nameField = new EditBox(font, leftPos + 90, topPos + 62, 156, 12, Component.literal(""));
+        this.addWidget(nameField);
 //        nameField.setText(container.tile.name);
         nameField.setValue(container.tile.name);
-        nameField.setFocused(true);
+        this.setFocused(this.nameField);
     }
 
     @Override
@@ -67,11 +68,7 @@ public class GuiArchitectTable extends GuiBC8<ContainerArchitectTable> {
         guiGraphics.drawString(font, title, leftPos + (float) (imageWidth - font.width(title)) / 2, topPos + 5, 0x404040, false);
 
 //        nameField.drawTextBox();
-        PoseStack poseStack = guiGraphics.pose();
-        poseStack.pushPose();
-        poseStack.translate(leftPos, topPos, 0);
         nameField.renderWidget(guiGraphics, 0, 0, Minecraft.getInstance().getFrameTime());
-        poseStack.popPose();
     }
 
     @Override
@@ -88,9 +85,9 @@ public class GuiArchitectTable extends GuiBC8<ContainerArchitectTable> {
 //    public boolean charTyped(char typedChar, int keyCode)
     public boolean keyPressed(int typedChar, int keyCode, int modifiers) {
         boolean typed = false;
-        if (nameField.isFocused()) {
+        if (typedChar != InputConstants.KEY_ESCAPE && nameField.isFocused()) {
 //            typed = nameField.textboxKeyTyped(typedChar, keyCode);
-            typed = nameField.keyPressed(typedChar, keyCode, modifiers);
+            typed = nameField.keyPressed(typedChar, keyCode, modifiers) || this.nameField.canConsumeInput();
 //            container.sendNameToServer(nameField.getText().trim());
             container.sendNameToServer(nameField.getValue().trim());
         }
@@ -105,9 +102,9 @@ public class GuiArchitectTable extends GuiBC8<ContainerArchitectTable> {
     @Override
     public boolean charTyped(char typedChar, int keyCode) {
         boolean typed = false;
-        if (nameField.isFocused()) {
+        if (typedChar != InputConstants.KEY_ESCAPE && nameField.isFocused()) {
 //            typed = nameField.textboxKeyTyped(typedChar, keyCode);
-            typed = nameField.charTyped(typedChar, keyCode);
+            typed = nameField.charTyped(typedChar, keyCode) || this.nameField.canConsumeInput();
 //            container.sendNameToServer(nameField.getText().trim());
             container.sendNameToServer(nameField.getValue().trim());
         }
